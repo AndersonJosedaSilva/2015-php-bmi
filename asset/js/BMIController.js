@@ -17,26 +17,32 @@ var BMIController = {
 		var 
 			weight = parseFloat(form.weight.value),
 			height = parseFloat(form.height.value),
-			result = 0;
+			result = 0,
+			result2 = " ";
 		
-		var callback = function(result) {
-			BMIController.showResult(result);			
-		};
+		result = BMIService.getIndex(weight, height);
+		result2 = BMIService.getDescription(result);
 		
-		BMIController.showLoading(true);
-		BMIService.getIndex(weight, height, callback);
+		BMIController.showResult(result);
+		BMIController.apresentarResultado(result2);
+	
 	},
 	
 	showResult: function(result) {
 		var spanResult = document.querySelector('.result');
 		spanResult.innerHTML = result.toFixed(2);
-		BMIController.showLoading(false);
 	},
 	
-	showLoading: function(isLoading) {
-		document.querySelector('.label').innerHTML = isLoading ? 'loading...' : 'BMI Result'
+	apresentarResultado: function(result2){
+		
+		var resultado = document.querySelector('.result2');
+		resultado.innerHTML = result2;
+		
 	}
+	
+	
 
+	
 };
 
 //initialization
